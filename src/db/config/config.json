@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "",
     "password": null,
     "database": "bloccit-dev",
     "host": "127.0.0.1",
@@ -9,7 +9,7 @@
      "operatorsAliases": false
   },
   "test": {
-    "username": "postgres",
+    "username": "",
     "password": null,
     "database": "bloccit-test",
     "host": "127.0.0.1",
@@ -18,7 +18,7 @@
     "operatorsAliases": false
   },
   "production": {
-    "username": "root",
+    "username": "",
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
