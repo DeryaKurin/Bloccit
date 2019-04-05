@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Add = sequelize.define('Add', {
+  var Ad = sequelize.define('Ad', {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     topicId: {
@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       as: "topicId",
      }
    }
- } , {});
-  Add.associate = function(models) {
+  }, {});
+  Ad.associate = function(models) {
     // associations can be defined here
-    Add.belongsTo(models.Topic, {
+    Ad.belongsTo(models.Topic, {
       foreignKey: "topicId",
       onDelete: "CASCADE"
     });
   };
-  return Add;
+  return Ad;
 };

@@ -1,9 +1,7 @@
 'use strict';
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Adds', {
+    return queryInterface.createTable('Ads', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -33,10 +31,9 @@ module.exports = {
           as: "topicId",
         },
       }
-   });
-
+    });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Adds');
+    return queryInterface.dropTable('Ads');
   }
 };

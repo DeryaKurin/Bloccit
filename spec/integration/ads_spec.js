@@ -1,22 +1,22 @@
 const request = require("request");
 const server = require("../../src/server");
-const base = "http://localhost:3000/adds/";
+const base = "http://localhost:3000/ads/";
 
 const sequelize = require("../../src/db/models/index").sequelize;
-const Add = require("../../src/db/models").Add;
+const Ad = require("../../src/db/models").Ad;
 
-describe("routes : adds", () => {
+describe("routes : ads", () => {
 
   beforeEach((done) => {
-      this.add;
+      this.ad;
       sequelize.sync({force: true}).then((res) => {
 
-       Add.create({
+       Ad.create({
          title: "JS Frameworks",
          description: "There is a lot of them"
        })
-        .then((add) => {
-          this.add = add;
+        .then((ad) => {
+          this.add = ad;
           done();
         })
         .catch((err) => {
@@ -29,7 +29,7 @@ describe("routes : adds", () => {
     });
 
 
-  describe("GET /adds", () => {
+  describe("GET /ads", () => {
 
     it("should return a status code 200 and all ads", (done) => {
       request.get(base, (err, res, body) => {
@@ -43,7 +43,7 @@ describe("routes : adds", () => {
 
   });
 
-  describe("GET /adds/new", () => {
+  describe("GET /ads/new", () => {
 
      it("should render a new advertisement form", (done) => {
        request.get(`${base}new`, (err, res, body) => {
@@ -55,7 +55,7 @@ describe("routes : adds", () => {
 
   });
 
-  describe("POST /adds/create", () => {
+  describe("POST /ads/create", () => {
       const options = {
         url: `${base}create`,
         form: {
@@ -65,18 +65,18 @@ describe("routes : adds", () => {
       };
 
 
-      it("should create a new add and redirect", (done) => {
+      it("should create a new ad and redirect", (done) => {
 
 //#1
         request.post(options,
 
 //#2
           (err, res, body) => {
-            Add.findOne({where: {title: "blink-182 songs"}})
-            .then((add) => {
+            Ad.findOne({where: {title: "blink-182 songs"}})
+            .then((ad) => {
               expect(res.statusCode).toBe(303);
-              expect(add.title).toBe("blink-182 songs");
-              expect(add.description).toBe("What's your favorite blink-182 song?");
+              expect(ad.title).toBe("blink-182 songs");
+              expect(ad.description).toBe("What's your favorite blink-182 song?");
               done();
             })
             .catch((err) => {

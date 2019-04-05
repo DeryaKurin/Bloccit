@@ -4,10 +4,10 @@
  const faker = require("faker");
 
 //#2
- let adds = [];
+ let ads = [];
 
  for(let i = 1 ; i <= 15 ; i++){
-    adds.push({
+    ads.push({
       title: faker.hacker.noun(),
       description: faker.hacker.phrase(),
       createdAt: new Date(),
@@ -28,7 +28,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-     return queryInterface.bulkInsert("Adds", adds, {});
+     return queryInterface.bulkInsert("Ads", ads, {});
   },
 
   down: (queryInterface, Sequelize) => {
@@ -39,6 +39,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-    return queryInterface.bulkDelete("Adds", null, {});
+    return queryInterface.bulkDelete("Ads", null, {});
   }
 };
