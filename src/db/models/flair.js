@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
+
   Flair.associate = function(models) {
     // associations can be defined here
     Flair.belongsTo(models.Post, {
       foreignKey: "postId",
       onDelete: "CASCADE"
-    });  
+    });
   };
   return Flair;
 };

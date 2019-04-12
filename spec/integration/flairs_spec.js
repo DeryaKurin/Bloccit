@@ -4,8 +4,9 @@ const base = "http://localhost:3000/posts";
 
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
-const Flair = require("../../src/db/models").Flair;
 const Post = require("../../src/db/models").Post;
+const Flair = require("../../src/db/models").Flair;
+
 
 describe("routes : flairs", () => {
 
@@ -72,8 +73,7 @@ describe("routes : flairs", () => {
         url: `${base}/${this.post.id}/flairs/create`,
         form: {
           name: "Cardinal",
-          color: "Red",
-          postId: this.post.id
+          color: "Red"
         }
       };
       request.post(options,
