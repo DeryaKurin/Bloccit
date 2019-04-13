@@ -19,5 +19,15 @@ module.exports = {
         res.redirect(303, `posts/${newFlair.postId}/flairs/${flair.id}`);
       }
     });
+  },
+
+  show(req, res, next) {
+    flairQueries.getFlair(req.params.id, (err, flair) => {
+      if( err || flair == null) {
+        res.redirect(404, "/");
+      } else {
+        res.render("flairs/show", {flair});
+      }
+    });
   }
 }

@@ -72,18 +72,18 @@ describe("routes : flairs", () => {
       const options = {
         url: `${base}/${this.post.id}/flairs/create`,
         form: {
-          name: "Cardinal",
-          color: "Red"
+          name: "BlueJay",
+          color: "Blue"
         }
       };
       request.post(options,
         (err, res, body) => {
 
-          Flair.findOne({where: {name: "Cardinal"}})
+          Flair.findOne({where: {name: "BlueJay"}})
           .then((flair) => {
             expect(flair).not.toBeNull();
-            expect(flair.name).toBe("Cardinal");
-            expect(flair.color).toBe("Red");
+            expect(flair.name).toBe("BlueJay");
+            expect(flair.color).toBe("Blue");
             expect(flair.postId).not.toBeNull();
             done();
           })
@@ -93,6 +93,18 @@ describe("routes : flairs", () => {
           });
         });
       });
+
+   });
+
+   describe("GET /posts/:postId/flairs/:id", () => {
+
+     it("should render a view with the selected flair", (done) => {
+       request.get(`${base}/${this.post.id}/flairs/${this.flair.id}`, (err, res, body) => {
+         expect(err).toBeNull();
+         expect(body).toContain("BlueJay");
+         done();
+       });
+     });
 
    });
 
