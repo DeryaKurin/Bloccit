@@ -10,7 +10,11 @@
 
       <h1> <%= flair.name %></h1>
 
-      <p><%= flair.color %></p>
+      <a href="/posts/<%= flair.postId %>/flairs/<%= flair.id %>/edit" class="btn btn-warning">Edit</a>
+      <form style="display:initial" action="/posts/<%= flair.postId %>/flairs/<%= flair.id %>/destroy" method="post">
+       <button type="submit" class="btn btn-danger">Delete</button>
+     </form>
+     <p><%= flair.color %></p>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
