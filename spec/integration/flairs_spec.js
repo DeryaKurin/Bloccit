@@ -17,7 +17,7 @@ describe("routes : flairs", () => {
 
     sequelize.sync({force: true}).then((res) => {
 
-//#1
+
       Topic.create({
         title: "Geography",
         description: "Information about Maryland"
@@ -112,12 +112,12 @@ describe("routes : flairs", () => {
 
      it("should delete the flair with the associated ID", (done) => {
 
-//#1
+
        expect(this.flair.id).toBe(1);
 
        request.post(`${base}/${this.topic.id}/posts/${this.post.id}/flairs/${this.flair.id}/destroy`, (err, res, body) => {
 
-//#2
+
          Flair.findById(1)
          .then((flair) => {
            expect(err).toBeNull();

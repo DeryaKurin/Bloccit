@@ -7,7 +7,7 @@ const Ad = require("../../src/db/models").Ad;
 
 describe("routes : ads", () => {
 
-  //#2
+
     beforeEach((done) => {
       this.ad;
       sequelize.sync({force: true}).then((res) => {
@@ -68,10 +68,10 @@ describe("routes : ads", () => {
 
      it("should create a new advertisement and redirect", (done) => {
 
-//#1
+
         request.post(options,
 
-//#2
+
           (err, res, body) => {
             Ad.findOne({
               where: {

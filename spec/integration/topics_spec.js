@@ -66,10 +66,10 @@ describe("routes : topics", () => {
 
       it("should create a new topic and redirect", (done) => {
 
-//#1
+
         request.post(options,
 
-//#2
+
           (err, res, body) => {
             Topic.findOne({where: {title: "blink-182 songs"}})
             .then((topic) => {
@@ -144,12 +144,12 @@ describe("routes : topics", () => {
              description: "There are a lot of them"
            }
          };
-//#1
+
          request.post(options,
            (err, res, body) => {
 
            expect(err).toBeNull();
-//#2
+
            Topic.findOne({
              where: { id: this.topic.id }
            })

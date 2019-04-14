@@ -4,7 +4,7 @@
   "description": "A Reddit-like application for users to discuss and share content",
   "main": "src/server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test && jasmine",
+    "test": "export NODE_ENV=test && jasmine",
     "start": "node src/server.js"
   },
   "author": "",
@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "cross-env": "^5.2.0",
     "dotenv": "^5.0.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",

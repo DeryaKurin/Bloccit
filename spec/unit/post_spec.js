@@ -39,7 +39,7 @@ describe("Post", () => {
   describe("#create()", () => {
 
      it("should create a post object with a title, body, and assigned topic", (done) => {
-//#1
+
        Post.create({
          title: "Pros of Cryosleep during the long journey",
          body: "1. Not having to answer the 'are we there yet?' question.",
@@ -47,7 +47,7 @@ describe("Post", () => {
        })
        .then((post) => {
 
-//#2
+
          expect(post.title).toBe("Pros of Cryosleep during the long journey");
          expect(post.body).toBe("1. Not having to answer the 'are we there yet?' question.");
          done();
@@ -87,19 +87,19 @@ describe("Post", () => {
 
      it("should associate a topic and a post together", (done) => {
 
-// #1
+
        Topic.create({
          title: "Challenges of interstellar travel",
          description: "1. The Wi-Fi is terrible"
        })
        .then((newTopic) => {
 
-// #2
+
          expect(this.post.topicId).toBe(this.topic.id);
-// #3
+
          this.post.setTopic(newTopic)
          .then((post) => {
-// #4
+
            expect(post.topicId).toBe(newTopic.id);
            done();
 
