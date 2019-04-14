@@ -21,7 +21,7 @@ module.exports = {
         console.log(req.body.color);
         res.redirect(500, "flairs/new");
       } else {
-        res.redirect(303, `/topics/${req.params.topicId}/posts/${newFlair.postId}/flairs/${newFlair.id}`);
+        res.redirect(303, `/topics/${req.params.topicId}/posts/${newFlair.postId}/flairs/${flair.id}`);
       }
     });
   },
