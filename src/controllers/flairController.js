@@ -2,7 +2,10 @@ const flairQueries = require("../db/queries.flairs.js");
 
 module.exports = {
   new(req, res, next) {
-     res.render("flairs/new", {postId: req.params.postId});
+     res.render("flairs/new", {
+       postId: req.params.postId,
+       topicId: req.params.topicId
+     });
   },
 
   create(req, res, next) {
