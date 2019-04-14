@@ -53,7 +53,7 @@ describe("routes : flairs", () => {
 
 });
 
-  describe("GET ${base}/${this.topic.id}/posts/:postId/flairs/new", () => {
+  describe("GET ${base}/:topicId/posts/:postId/flairs/new", () => {
 
     it("should render a new flair form", (done) => {
       request.get(`${base}/${this.topic.id}/posts/${this.post.id}/flairs/new`, (err, res, body) => {
@@ -66,7 +66,7 @@ describe("routes : flairs", () => {
   });
 
 
- describe("POST ${base}/${this.topic.id}/posts/:postId/flairs/create", () => {
+ describe("POST ${base}/:topicId/posts/:postId/flairs/create", () => {
 
    it("should create a new flair and redirect", (done) => {
       const options = {
@@ -96,7 +96,7 @@ describe("routes : flairs", () => {
 
    });
 
-   describe("GET ${base}/${this.topic.id}/posts/:postId/flairs/:id", () => {
+   describe("GET ${base}/:topicId/posts/:postId/flairs/:id", () => {
 
      it("should render a view with the selected flair", (done) => {
        request.get(`${base}/${this.topic.id}/posts/${this.post.id}/flairs/${this.flair.id}`, (err, res, body) => {
@@ -108,7 +108,7 @@ describe("routes : flairs", () => {
 
    });
 
-   describe("POST ${base}/${this.topic.id}/posts/:postId/flairs/:id/destroy", () => {
+   describe("POST ${base}/:topicId/posts/:postId/flairs/:id/destroy", () => {
 
      it("should delete the flair with the associated ID", (done) => {
 
@@ -130,7 +130,7 @@ describe("routes : flairs", () => {
 
    });
 
-   describe("GET ${base}/${this.topic.id}/posts/:postId/flairs/:id/edit", () => {
+   describe("GET ${base}/:topicId/posts/:postId/flairs/:id/edit", () => {
 
      it("should render a view with an edit flair form", (done) => {
        request.get(`${base}/${this.topic.id}/posts/${this.post.id}/flairs/${this.flair.id}/edit`, (err, res, body) => {
@@ -143,7 +143,7 @@ describe("routes : flairs", () => {
 
    });
 
-   describe("POST ${base}/${this.topic.id}/posts/:postId/flairs/:id/update", () => {
+   describe("POST ${base}/:topicId/posts/:postId/flairs/:id/update", () => {
 
      it("should return a status code 302", (done) => {
        request.post({

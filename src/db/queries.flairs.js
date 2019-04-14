@@ -53,24 +53,5 @@ module.exports = {
          callback(err);
        });
      });
-   },
-
-   updateFlair(id, updatedFlair, callback){
-     return Flair.findById(id)
-     .then((flair) => {
-       if(!flair){
-         return callback("Flair not found");
-       }
-
-       flair.update(updatedFlair, {
-         fields: Object.keys(updatedFlair)
-       })
-       .then(() => {
-         callback(null, flair);
-       })
-       .catch((err) => {
-         callback(err);
-       });
-     });
    }
 }
