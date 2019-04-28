@@ -1,6 +1,12 @@
 const Post = require("./models").Post;
 const Topic = require("./models").Topic;
 const Flair = require("./models").Flair;
+const User = require("./models").User;
+const Authorizer = require('../policies/post');
+
+
+
+
 
 module.exports = {
   addPost(newPost, callback) {
@@ -41,12 +47,15 @@ module.exports = {
   },
 
   updatePost(id, updatedPost, callback) {
-    return Post.findById(id)
+    return Post.findById(rew.params.id)
     .then((post) => {
       if(!post) {
-        return callback("Post not found");
+        return callback(404);
       }
 
+      const authorized = new Authorizer(req.user, post).update();
+
+      if(authorized) {
       post.update(updatedPost, {
         fields: Object.keys(updatedPost)
       })
@@ -56,6 +65,10 @@ module.exports = {
       .catch((err) => {
         callback(err);
       });
+     } else {
+      req.flash("notice", "You are not authorized to do that.");
+        callback(403);
+    }
     });
   }
 }

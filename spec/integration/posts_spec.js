@@ -72,6 +72,7 @@ describe("routes : posts", () => {
       });
     });
 
+
   describe("GET /topics/:topicId/posts/new", () => {
     it("should render a new post form", (done) => {
       request.get(`${base}/${this.topic.id}/posts/new`, (err,res, body) => {
@@ -230,16 +231,26 @@ describe("routes : posts", () => {
    describe("member user performing CRUD actions for Post", () => {
 
      beforeEach((done) => {
-       request.get({
-         url: "http://localhost:3000/auth/fake",
-         form: {
-           role: "member"
-         }
-       },
-         (err, res, body) => { //did not remove at refactoring
-           done();
-         });
-     });
+      User.create({
+        email: "member@example.com",
+        password: "123456",
+        role: "member"
+      })
+      .then((user) => {
+        request.get({         // mock authentication
+          url: "http://localhost:3000/auth/fake",
+          form: {
+            role: user.role,     // mock authenticate as admin user
+            userId: user.id,
+            email: user.email
+          }
+        },
+          (err, res, body) => {
+            done();
+          }
+        );
+      });
+    });
 
      describe("GET /topics/:topicId/posts/new", () => {
        it("should render a new post form", (done) => {
@@ -495,7 +506,7 @@ describe("routes : posts", () => {
         expect(err).toBeNull();
 
         Post.findOne({
-          where: { id: 1 }
+          where: { id: this.post.id }
         })
         .then((post) => {
           expect(post.title).toBe("Snowball Fighting");
