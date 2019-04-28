@@ -386,17 +386,11 @@ describe("routes : posts", () => {
   describe("guest user performing CRUD actions for Post", () => {
 
     beforeEach((done) => {
-      User.create({
-        email: "admin@example.com",
-        password: "123456",
-      })
-      .then((user) => {
-        request.get({         // mock authentication
+
+        request.get({    // mock authentication
           url: "http://localhost:3000/auth/fake",
           form: {
-            role: user.role,     // mock authenticate as guest user
-            userId: 0,
-            email: user.email
+            userId: 0
           }
         },
           (err, res, body) => {
@@ -404,7 +398,7 @@ describe("routes : posts", () => {
           }
         );
       });
-    });
+
 
     describe("GET /topics/:topicId/posts/new", () => {
 
@@ -434,6 +428,7 @@ describe("routes : posts", () => {
                 Post.findOne({where: {title: "Watching snow melt"}})
                 .then((post) => {
                     expect(post).toBeNull();
+                    expect(body).toContain("/users/sign_in");
                     done();
                 })
                 .catch((err) => {
@@ -496,7 +491,7 @@ describe("routes : posts", () => {
       };
       request.post(options,
         (err, res, body) => {
-
+        expect(body).toContain("Redirecting");
         expect(err).toBeNull();
 
         Post.findOne({
