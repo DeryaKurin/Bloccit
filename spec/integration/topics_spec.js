@@ -179,7 +179,7 @@ describe("routes : topics", () => {
 
       });
 
-    })
+    });
 
      //end context for admin user
 
