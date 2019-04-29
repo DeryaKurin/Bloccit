@@ -56,15 +56,7 @@ module.exports = {
          console.log(err);
          res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
        } else {
-
-         const authorized = new Authorizer(req.user, post).destroy();
-
-         if(authorized) {
-           res.redirect(303, `/topics/${req.params.topicId}`);
-         } else {
-           req.flash("notice", "You are not authorized to do that.");
-           res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`);
-         }
+          res.redirect(303, `/topics/${req.params.topicId}`);
        }
      });
   },
@@ -91,8 +83,8 @@ module.exports = {
    update(req, res, next){
      postQueries.updatePost(req.params.id, req.body, (err, post) => {
        if(err || post == null){
-         console.log(err);
-         res.redirect(404, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
+         console.log("ERROR:", err);
+         res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
        } else {
          res.redirect(`/topics/${req.params.topicId}/posts/${req.params.id}`);
        }
