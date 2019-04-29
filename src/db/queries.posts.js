@@ -56,7 +56,7 @@ module.exports = {
      });
   },
 
-  updatePost(id, updatedPost, callback) {
+  updatePost(req, updatedPost, callback) {
     return Post.findById(req.params.id)
     .then((post) => {
 

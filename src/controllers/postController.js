@@ -51,7 +51,7 @@ module.exports = {
   },
 
   destroy(req, res, next) {
-    postQueries.deletePost(req.params.id, (err, post) => {
+    postQueries.deletePost(req, (err, post) => {
        if(err) {
          console.log(err);
          res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
@@ -81,7 +81,7 @@ module.exports = {
    },
 
    update(req, res, next){
-     postQueries.updatePost(req.params.id, req.body, (err, post) => {
+     postQueries.updatePost(req, req.body, (err, post) => {
        if(err || post == null){
          console.log("ERROR:", err);
          res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
