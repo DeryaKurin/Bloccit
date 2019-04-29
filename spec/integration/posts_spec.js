@@ -154,13 +154,9 @@ describe("routes : posts", () => {
    describe("POST /topics/:topicId/posts/:id/destroy", () => {
 
      it("should delete the post with the associated ID", (done) => {
-
-//#1
        expect(this.post.id).toBe(1);
 
        request.post(`${base}/${this.topic.id}/posts/${this.post.id}/destroy`, (err, res, body) => {
-
-//#2
          Post.findById(1)
          .then((post) => {
            expect(err).toBeNull();
@@ -193,6 +189,7 @@ describe("routes : posts", () => {
            body: "I love watching them melt slowly."
          }
        }, (err, res, body) => {
+
          expect(res.statusCode).toBe(302);
          done();
        });
@@ -208,9 +205,7 @@ describe("routes : posts", () => {
          };
          request.post(options,
            (err, res, body) => {
-
            expect(err).toBeNull();
-
            Post.findOne({
              where: {id: this.post.id}
            })

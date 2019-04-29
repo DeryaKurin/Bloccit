@@ -34,12 +34,22 @@ module.exports = {
     });
   },
 
-  deletePost(id, callback) {
-    return Post.destroy({
-      where: { id }
-    })
-    .then((deletedRecordsCount) => {
-      callback(null, deletedRecordsCount);
+  deletePost(req, callback) {
+    return Post.findById(req.params.id)
+    .then((topic) => {
+      const authorized = new Authorizer(req.user, post).destroy();
+
+         if(authorized) {
+   // #3
+           post.destroy()
+           .then((res) => {
+             callback(null, post);
+           });
+
+         } else {
+           req.flash("notice", "You are not authorized to do that.")
+           callback(401);
+         }
     })
     .catch((err) => {
        callback(err);
@@ -50,7 +60,7 @@ module.exports = {
     return Post.findById(rew.params.id)
     .then((post) => {
       if(!post) {
-        return callback(404);
+        return callback("Post not found");
       }
 
       const authorized = new Authorizer(req.user, post).update();
@@ -67,7 +77,7 @@ module.exports = {
       });
      } else {
       req.flash("notice", "You are not authorized to do that.");
-        callback(403);
+        callback("Forbidden");
     }
     });
   }

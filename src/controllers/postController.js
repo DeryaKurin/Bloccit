@@ -51,9 +51,10 @@ module.exports = {
   },
 
   destroy(req, res, next) {
-    postQueries.deletePost(req, (err, post) => {
+    postQueries.deletePost(req.params.id, (err, post) => {
        if(err) {
-         res.redirect(err, `/topics/${req.params.topicId}/posts/${req.params.id}`)
+         console.log(err);
+         res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`)
        } else {
 
          const authorized = new Authorizer(req.user, post).destroy();
@@ -73,6 +74,7 @@ module.exports = {
 
        if(err || post == null){
          res.redirect(404, "/");
+         console.log(err);
        } else {
          const authorized = new Authorizer(req.user, post).edit();
 
@@ -87,8 +89,9 @@ module.exports = {
    },
 
    update(req, res, next){
-     postQueries.updatePost(req, req.body, (err, post) => {
+     postQueries.updatePost(req.params.id, req.body, (err, post) => {
        if(err || post == null){
+         console.log(err);
          res.redirect(404, `/topics/${req.params.topicId}/posts/${req.params.id}/edit`);
        } else {
          res.redirect(`/topics/${req.params.topicId}/posts/${req.params.id}`);
