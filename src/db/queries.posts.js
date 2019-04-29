@@ -2,7 +2,7 @@ const Post = require("./models").Post;
 const Topic = require("./models").Topic;
 const Flair = require("./models").Flair;
 const User = require("./models").User;
-const Authorizer = require('../policies/post');
+const Authorizer = require("../policies/post");
 
 
 
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   updatePost(id, updatedPost, callback) {
-    return Post.findById(rew.params.id)
+    return Post.findById(req.params.id)
     .then((post) => {
       if(!post) {
         return callback("Post not found");
