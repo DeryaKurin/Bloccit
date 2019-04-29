@@ -408,10 +408,9 @@ describe("routes : posts", () => {
 
     describe("GET /topics/:topicId/posts/new", () => {
 
-      it("should redirect to topic show view", (done) => {
+      it("should not render a new post form", (done) => {
       request.get(`${base}/${this.topic.id}/posts/new`, (err, res, body) => {
-        expect(err).toBeNull();
-        expect(body).toContain("Posts");
+        expect(body).toContain("Error");
         done();
       });
      });
@@ -434,7 +433,6 @@ describe("routes : posts", () => {
                 Post.findOne({where: {title: "Watching snow melt"}})
                 .then((post) => {
                     expect(post).toBeNull();
-                    expect(body).toContain("/users/sign_in");
                     done();
                 })
                 .catch((err) => {
