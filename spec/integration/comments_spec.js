@@ -195,7 +195,7 @@ describe("routes : comments", () => {
              expect(res.statusCode).toBe(302);
              Comment.all()
              .then((comments) => {
-               console.log("ERROR:", err);
+
                expect(err).toBeNull();
                expect(comments.length).toBe(commentCountBeforeDelete - 1);
                done();

@@ -77,7 +77,6 @@ module.exports = {
         callback(null, post);
       })
       .catch((err) => {
-        console.log("ERROR:", err);
         callback(err);
       });
      } else {
