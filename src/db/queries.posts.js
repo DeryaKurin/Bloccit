@@ -23,17 +23,12 @@ module.exports = {
 
   getPost(id, callback) {
     return Post.findById(id, {
-      include: [{
-        model: Flair,
-        as: "flairs"
-      }],
-      include: [{
-        model: Comment, as: "comments", include: [{
-        model: User
-      }
+       include: [
+         {model: Comment, as: "comments", include: [
+           {model: User }
          ]}
        ]
-    })
+     })
     .then((post) => {
       callback(null, post);
     })

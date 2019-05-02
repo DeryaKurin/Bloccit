@@ -4,7 +4,6 @@ module.exports = {
     const topicRoutes = require("../routes/topics");
     const adRoutes = require("../routes/ads");
     const postRoutes = require("../routes/posts");
-    const flairRoutes = require("../routes/flairs");
     const userRoutes = require("../routes/users");
     const commentRoutes = require("../routes/comments");
 
@@ -20,7 +19,6 @@ module.exports = {
     app.use(topicRoutes);
     app.use(adRoutes);
     app.use(postRoutes);
-    app.use(flairRoutes);
     app.use(userRoutes);
     app.use(commentRoutes);
 
