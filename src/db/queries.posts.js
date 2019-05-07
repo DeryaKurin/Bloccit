@@ -3,6 +3,8 @@ const Topic = require("./models").Topic;
 const Flair = require("./models").Flair;
 const User = require("./models").User;
 const Comment = require("./models").Comment;
+const Vote = require("./models").Vote;
+
 
 const Authorizer = require("../policies/post");
 
@@ -26,7 +28,7 @@ module.exports = {
        include: [
          {model: Comment, as: "comments", include: [
            {model: User }
-         ]}
+         ]}, {model: Vote, as: "votes"}
        ]
      })
     .then((post) => {
