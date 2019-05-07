@@ -97,7 +97,6 @@ describe("routes : votes", () => {
            }
          );
        });
-
      });
    });
 
@@ -145,6 +144,36 @@ describe("routes : votes", () => {
            }
          );
        });
+
+       it("should not create multiple votes per user for the same post", (done) => {
+         const options = {
+           url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
+         };
+         request.get(options,
+         (err, res, body) => {
+           Vote.findOne({
+             where: {
+               userId: this.user.id,
+               postId: this.post.id
+             }
+           })
+           .then((vote) => {
+             request.get(options,
+             (err, res, body) => {
+               Vote.findAll({
+                 where: {
+                   userId: this.user.id,
+                   postId: this.post.id
+                 }
+               })
+               .then((votes) => {
+                 expect(votes.length).toBe(1);
+                 done();
+               })
+             })
+           });
+         });
+       });
      });
 
      describe("GET /topics/:topicId/posts/:postId/votes/downvote", () => {
@@ -175,9 +204,40 @@ describe("routes : votes", () => {
            }
          );
        });
+
+       it("should not create multiple downvotes per user for the same post", (done) => {
+         const options = {
+           url: `${base}${this.topic.id}/posts/${this.post.id}/votes/downvote`
+         };
+         request.get(options,
+         (err, res, body) => {
+           Vote.findOne({
+             where: {
+               userId: this.user.id,
+               postId: this.post.id
+             }
+           })
+           .then((vote) => {
+             request.get(options,
+             (err, res, body) => {
+               Vote.findAll({
+                 where: {
+                   userId: this.user.id,
+                   postId: this.post.id
+                 }
+               })
+               .then((votes) => {
+                 expect(votes.length).toBe(1);
+                 done();
+               })
+             })
+           })
+           .catch((err) => {
+             console.log(err);
+             done();
+           })
+         })
+       })
      });
-
    }); //end context for signed in user
-
-
 });

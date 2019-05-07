@@ -2,6 +2,7 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
 const User = require("../../src/db/models").User;
+const Vote = require("../../src/db/models").Vote;
 
 
 describe("Post", () => {
@@ -169,6 +170,46 @@ describe("Post", () => {
 
      });
 
+   });
+
+   describe("#getPoints()", () => {
+     it("should return the total votes for a post if there is any", (done) => {
+       let totalPoints = this.post.getPoints();
+       expect(totalPoints).toBe(0);
+       done();
+     });
+   });
+
+   describe("#hasUpvoteFor()", () => {
+     it("should return TRUE if the user has an upvote for the post", (done) => {
+       Vote.create({
+         value: 1,
+         userId: this.user.id,
+         postId: this.post.id
+       })
+       .then((vote) => {
+         this.post.hasUpvoteFor(this.user.id, (res) => {
+           expect(res).toBeTruthy();
+           done();
+         });
+       });
+     });
+   });
+
+   describe("#hasDownvoteFor()", () => {
+     it("should return TRUE if the user has a downvote for the post", (done) => {
+       Vote.create({
+         value: -1,
+         userId: this.user.id,
+         postId: this.post.id
+       })
+       .then((vote) => {
+         this.post.hasDownvoteFor(this.user.id, (res) => {
+           expect(res).toBeTruthy();
+           done();
+         });
+       });
+     });
    });
 
 });
