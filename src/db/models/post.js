@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
        onDelete: "CASCADE"
      });
 
+     Post.belongsTo(models.User, {
+      foreignKey: "userId",
+      onDelete: "CASCADE"
+    });
+
     Post.hasMany(models.Comment, {
      foreignKey: "postId",
      as: "comments"
@@ -47,10 +52,15 @@ module.exports = (sequelize, DataTypes) => {
      });
    });
 
-    Post.belongsTo(models.User, {
-     foreignKey: "userId",
-     onDelete: "CASCADE"
+
+   Post.afterCreate((post, callback) => {
+     return models.Vote.create({
+         userId: post.userId,
+         postId: post.id,
+         value: 1
+     });
    });
+
   };
 
   Post.prototype.getPoints = function() {
