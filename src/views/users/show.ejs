@@ -16,7 +16,7 @@
 
       <hr>
 
-      <h2> Latest Posts</h2>
+      <h2 style="margin-top: 2rem;"> Latest Posts</h2>
 
       <ul class="list-unstyled">
 
@@ -50,6 +50,25 @@
               <p>Comment: <%= comment.body %></p>
             </li>
             <hr>
+          <% }) %>
+        <% } %>
+      </ul>
+
+      <hr>
+
+      <h2> Latest Favorites</h2>
+
+      <ul class="list-unstyled">
+
+ <!-- #2 -->
+        <% if(favorites) { %>
+          <% favorites.forEach((favorite) => { %>
+ <!-- #3 -->
+            <li>
+              <a href="/topics/<%= favorite.Post.topicId %>/posts/<%= favorite.Post.postId %>/favorites/<%= favorite.Post.id %>">
+                <%= favorite.Post.title %>
+              </a>
+            </li>
           <% }) %>
         <% } %>
       </ul>
